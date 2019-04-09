@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<Resource 
+	name="jdbc/twister_BD" 
+	type="javax.sql.DataSource"
+	maxActive="100" maxIdle="30" maxWait="10000"
+	url="jdbc:mysql://localhost/twister_BD"
+	driverClassName="com.mysql.jdbc.Driver"
+	username="root" 
+	password="root"
+	/>
+</Context>

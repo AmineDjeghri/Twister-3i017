@@ -1,0 +1,20 @@
+	ERRORS 									: 			CODES 
+
+
+Friend errors :
+	Missing Parameter						: -2
+	Not connected							: -3
+	You can't add yourself as a friend		: -4
+	User don't exist 						: -5
+	Already friends							: -6
+	Not friends								: -7
+	Problem occured in N Service 			: -1
+
+User errors :
+	User already exists 					:
+	User don't exist 						:
+	Wrong password 							:
+	User already connected 					: 
+	Problem occured in N Service 			: -1
+	
+Message errors : (not yet)
