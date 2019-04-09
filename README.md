@@ -2,6 +2,9 @@
 
 This is a university project for "Technologies du Web - L3" 
 It's a 'Tweeter like' website called 'Twister'
+it contains :
+- A server-side (Java ee)
+- A client-side (ReactJS)
 
 ## Programming Languages & Development Tools
 ### Langage: 
@@ -12,12 +15,12 @@ Eclipse
 ### Servers:
 -tomcat v9.0 (added to eclipse)
 ### SQL database:
-	-mysql local: wamp/xamp 
- 	-mysql on cloud (remotemysql.com , don't change the generated password when you create your database)
+-mysql local: wamp/xamp 
+-mysql on cloud (remotemysql.com , don't change the generated password when you create your database)
  	
 ### NoSQL database: 	
-    -mongoDb 4.0.6 local 
-    -mongoDb Atlas on cloud 
+-mongoDb 4.0.6 local 
+-mongoDb Atlas on cloud 
 
 To use the local or the remote database : open the java file Database.java, and choose the databse in both functions:
 getMySQLConnection and getMongoDBConnection 
@@ -31,8 +34,14 @@ mongoDB Compass: a GUI that lets you visually, explore your data.
 
 
 ## Installation
-
-The easiest way is to import it as a git repository using Eclipse and run it using tomcat v9.0 then:
+First Clone it:
+```
+ git clone --recurse-submodules http://github.com/AmineDjeghri/Twister.git
+```
+-the server-side is Twister/Twister, import the project inside Eclipse and run it in a server (Tomcat v9.0)
+-the client-side is Twister/twister-react, run it with npm:
+	```npm install```
+	```npm start```
 
 #### You can change the actual configuration inside the file: 
 Twister/src/db/DBStatic.java
