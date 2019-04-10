@@ -26,9 +26,9 @@ public class ListFollowing extends HttpServlet {
     
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String key_session=request.getParameter("key_session");
+		String user_id=request.getParameter("user_id");
 
-		JSONObject json= FollowerS.listFollowing(key_session);
+		JSONObject json= FollowerS.listFollowing(user_id);
 		PrintWriter resp= response.getWriter();
 
 		response.setContentType("text/json");

@@ -26,10 +26,11 @@ public class TwistS {
 		
 		if(key_session==null || message==null  )
 			return ErrorJSON.serviceRefused("Missing parameter",-1);
+		Connection connection=null;
 		
 		try {
 			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
+			 connection = Database.getMySQLConnection();
 
 			
 			if(!SessionTools.isConnectedByKey(key_session,connection)) {
@@ -59,6 +60,14 @@ public class TwistS {
 			e.printStackTrace();
 			
 		}
+		finally {
+			if(connection!=null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
 		return ErrorJSON.serviceRefused("Problem occured in addMessage Service", -1);
 	}
 	
@@ -68,10 +77,11 @@ public class TwistS {
 		
 		if(key_session==null || id_message==null  )
 			return ErrorJSON.serviceRefused("missing parameter",-1);
+		Connection connection=null;
 		
 		try {
 			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
+			 connection = Database.getMySQLConnection();
 			
 			String id_user=SessionTools.getIdUser(key_session,connection);
 			
@@ -91,7 +101,7 @@ public class TwistS {
 			MongoCollection<Document> commentCollection = mongoDatabase.getCollection("message");
 		
 			if(!TwistTools.twistExists(id_message, commentCollection)) {
-				return ErrorJSON.serviceRefused("Message don't exists",1);
+				return ErrorJSON.serviceRefused("Message doesn't exist",1);
 			}
 			
 			if(!TwistTools.checkAuthor(id_user, id_message, commentCollection)) {
@@ -106,6 +116,14 @@ public class TwistS {
 			e.printStackTrace();
 			
 		}
+		finally {
+			if(connection!=null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
 		return ErrorJSON.serviceRefused("Problem occured in removeMessage Service", -1);
 
 	}
@@ -116,10 +134,11 @@ public class TwistS {
 		
 		if(key_session==null)
 			return ErrorJSON.serviceRefused("missing parameter",-1);
+		Connection connection =null;
 		
 		try {
 			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
+			 connection = Database.getMySQLConnection();
 
 			if(!SessionTools.isConnectedByKey(key_session,connection)) {
 				return ErrorJSON.serviceRefused("Not connected",-3);	
@@ -150,70 +169,85 @@ public class TwistS {
 			e.printStackTrace();
 		}catch(SQLException e) {
 			e.printStackTrace();
-			
-		}
+		}	finally {
+				if(connection!=null)
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+			}	
+		
 		return ErrorJSON.serviceRefused("Problem occured in listMessages Service", -1);
 	}
 
 	
 public static JSONObject wallTwists(String key_session) {
 		
-		if(key_session==null)
-			return ErrorJSON.serviceRefused("missing parameter",-1);
+	if(key_session==null)
+		return ErrorJSON.serviceRefused("missing parameter",-1);
+	
+	Connection connection=null;
+	try {
+		//connect to mysql
+		 connection = Database.getMySQLConnection();
+
+		if(!SessionTools.isConnectedByKey(key_session,connection)) {
+			return ErrorJSON.serviceRefused("Not connected",-3);	
+		} 
 		
-		try {
-			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
-
-			if(!SessionTools.isConnectedByKey(key_session,connection)) {
-				return ErrorJSON.serviceRefused("Not connected",-3);	
-			} 
-			
-			if(SessionTools.hasExceededTimeOut(key_session, connection)) {
-				SessionTools.removeSession(key_session,connection);
-				return ErrorJSON.serviceRefused("TimeOut exceeded, disconnected automatically", 1);
-			}
-			//ajout de 30min dans session_fin
-			SessionTools.updateTimeOut(key_session, connection);
-			
-			MongoDatabase mongoDatabase=Database.getMongoDBConnection();
-			MongoCollection<Document> meessageCollection = mongoDatabase.getCollection("message");
-
-
-			//user id + friends ids
-			String id_user=SessionTools.getIdUser(key_session,connection);
-			System.out.println(id_user);
-			
-			ArrayList<String> ids = new ArrayList<String>();
-			ids.add(id_user);
-			
-			JSONArray friends = FollowerTools.listFollowing(id_user, connection).getJSONArray("friends");
-			System.out.println(friends);
-			
-			JSONObject friend=new JSONObject();
-			for(int i=0;i<friends.length();i++) {
-				friend=friends.getJSONObject(i);
-				ids.add(friend.getString("id_friend"));
-			}
-			
-			System.out.println(friends);
-			ArrayList<JSONObject> twists = new ArrayList<>();
-			for(String id:ids) {	
-			JSONArray user_twists =TwistTools.listMessages(id, meessageCollection).getJSONArray("messages");
-					for(int i=0;i<user_twists.length();i++) {
-						twists.add(user_twists.getJSONObject(i));
-					}
-			}
-			return new JSONObject().put("twists", twists);
-			
-		}catch(JSONException e) {
-			e.printStackTrace();
-		}catch(SQLException e) {
-			e.printStackTrace();
-			
+		if(SessionTools.hasExceededTimeOut(key_session, connection)) {
+			SessionTools.removeSession(key_session,connection);
+			return ErrorJSON.serviceRefused("TimeOut exceeded, disconnected automatically", 1);
 		}
-		return ErrorJSON.serviceRefused("Problem occured in Wall Twists Service", -1);
+		//ajout de 30min dans session_fin
+		SessionTools.updateTimeOut(key_session, connection);
+		
+		MongoDatabase mongoDatabase=Database.getMongoDBConnection();
+		MongoCollection<Document> meessageCollection = mongoDatabase.getCollection("message");
+
+
+		//user id + friends ids
+		String id_user=SessionTools.getIdUser(key_session,connection);
+		System.out.println(id_user);
+		
+		ArrayList<String> ids = new ArrayList<String>();
+		ids.add(id_user);
+		
+		JSONArray friends = FollowerTools.listFollowing(id_user, connection).getJSONArray("friends");
+		
+		JSONObject friend=new JSONObject();
+		for(int i=0;i<friends.length();i++) {
+			friend=friends.getJSONObject(i);
+			ids.add(friend.getString("id_friend"));
+		}
+		
+		ArrayList<JSONObject> twists = new ArrayList<>();
+		for(String id:ids) {	
+		JSONArray user_twists =TwistTools.listMessages(id, meessageCollection).getJSONArray("messages");
+				for(int i=0;i<user_twists.length();i++) {
+					twists.add(user_twists.getJSONObject(i));
+				}
+		}
+		return new JSONObject().put("twists", twists);
+		
+	}catch(JSONException e) {
+		e.printStackTrace();
+	}catch(SQLException e) {
+		e.printStackTrace();
+		
 	}
+	finally {
+		if(connection!=null)
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	return ErrorJSON.serviceRefused("Problem occured in Wall Twists Service", -1);
+
+}
 
 
 	/** À completer */

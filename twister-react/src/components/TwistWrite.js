@@ -47,16 +47,15 @@ class TwistWrite extends Component {
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
-                    this.props.updateWall();
+                    this.props.refreshList()
                 })
-
-
-
-
 
         }
 
         this.setState({ validated: true });
+        event.preventDefault();
+
+
 
     }
 

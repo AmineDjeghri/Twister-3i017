@@ -40,6 +40,7 @@ class Profile extends Component {
             commentList:this.commentList,
             likeCounter: 120,
             commentCounter:23,
+            comments:[],
         }
 
         this.twistList=[this.twist,this.twist,this.twist]
@@ -116,7 +117,7 @@ class Profile extends Component {
 
                 <Row className="main-container main-container__row justify-content-md-center">
                     <Col  md="6">
-                        {show==="twists" ? <TwistList twistList={this.twistList}/> :(
+                        {show==="twists" ? <TwistList twists={this.twistList}/> :(
                             show==="followers" ? <FollowerList followerList={this.followerList}/> :
                                 <FollowingList followingList={this.followerList}/>
                         )}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Button, Dropdown, Media} from 'react-bootstrap';
 import {FaRegComment, FaRegHeart} from "react-icons/fa/index";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 class Comment extends Component {
 
@@ -21,7 +23,7 @@ class Comment extends Component {
         super(props)
 
         this.state={
-          comment:this.props.comment,
+            comment:this.props.comment,
             isPostOwner:false,
             isCommentOwner:false,
         }
@@ -32,7 +34,20 @@ class Comment extends Component {
     }
 
 
-    handleDelete (evt)  {
+    handleDelete ()  {
+        const params={
+            key_session:Cookies.get('key_session'),
+            id_message:this.props.twistId,
+            id_comment:this.props.comment.id_comment,
+        }
+
+        axios.delete('http://localhost:8080/Twister/comment/remove',{params})
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+
+            })
+
     }
 
 
@@ -61,7 +76,7 @@ class Comment extends Component {
                                 <Dropdown.Toggle className="twist__dropdown-toggle" variant="success" size="sm" id="dropdown-basic"/>
                                 <Dropdown.Menu alignRight>
                                     <Dropdown.Item href="#/action-1">Edit </Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Delete </Dropdown.Item>
+                                    <Dropdown.Item onClick={this.handleDelete}>Delete </Dropdown.Item>
                                     <Dropdown.Item href="#/action-3">Report</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>

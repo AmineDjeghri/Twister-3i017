@@ -29,7 +29,7 @@ public class TwistTools {
 		
 		doc.append("login", login);
 		
-		doc.append("id_msg", ObjectId.get().toHexString());
+		doc.append("id_message", ObjectId.get().toHexString());
 		doc.append("date",new Timestamp(System.currentTimeMillis()) );
 		doc.append("text", message);
 
@@ -44,7 +44,7 @@ public class TwistTools {
 	
 	public static boolean checkAuthor(String id_user, String id_message, MongoCollection<Document> collection) {
 		Document doc =new Document();
-		doc.append("id_msg", id_message);
+		doc.append("id_message", id_message);
 		doc.append("id_user", id_user);
 		
 		MongoCursor<Document> result = (MongoCursor<Document>) collection.find(doc).iterator();
@@ -58,14 +58,14 @@ public class TwistTools {
 	
 	public static void removeTwist(String id_user, String id_message, MongoCollection<Document> collection) {
 		Document doc =new Document();
-		doc.append("id_msg", id_message);		
+		doc.append("id_message", id_message);		
 		collection.deleteOne(doc);
 
 	}
 
 	public static boolean twistExists(String id_message, MongoCollection<Document> collection) {
 		Document doc =new Document();
-		doc.append("id_msg", id_message);
+		doc.append("id_message", id_message);
 		
 		MongoCursor<Document> result = (MongoCursor<Document>) collection.find(doc).iterator();
 		
@@ -81,15 +81,16 @@ public class TwistTools {
 		Document doc =new Document();
 		doc.append("id_user", id_user);
 		
-		MongoCursor<Document> result = (MongoCursor<Document>) collection.find(doc).iterator();
+		MongoCursor<Document> result = (MongoCursor<Document>) collection.find(doc).sort(new Document("date",-1)).iterator();
 		
+			
 		ArrayList<JSONObject> messages = new ArrayList<>();
 		
 		while(result.hasNext()) {
 			Document o = result.next();
 			JSONObject message = new JSONObject();
 			message.put("id_user", o.get("id_user"));
-			message.put("id_msg", o.get("id_msg"));
+			message.put("id_message", o.get("id_message"));
 			message.put("login", o.get("login"));
 			message.put("fullName", o.get("fullName"));
 			message.put("date", o.get("date"));
@@ -101,14 +102,16 @@ public class TwistTools {
 			message.put("likes", o.get("likes"));
 			messages.add(message);
 		}
+		
 		ob.put("messages", messages);
+		
 		return ob;
 		
 	}
 	
 	public static Document getTwist(String id_message,  MongoCollection<Document> collection) {
 		Document doc =new Document();
-		doc.append("id_msg", id_message);
+		doc.append("id_message", id_message);
 	
 		Document message = new Document();
 		
@@ -130,9 +133,9 @@ public class TwistTools {
 			Document o = result.next();
 			JSONObject message = new JSONObject();
 			message.put("id_user", o.get("id_user"));
-			message.put("id_msg", o.get("id_msg"));
+			message.put("id_message", o.get("id_message"));
 			message.put("date", o.get("date"));
-			message.put("message", o.get("message"));
+			message.put("text", o.get("text"));
 			message.put("comments", o.get("comments"));
 			message.put("likes", o.get("likes"));
 			messages.add(message);
@@ -152,10 +155,10 @@ public class TwistTools {
 		Document doc =new Document();
 		
 		doc.append("id_user", id_user);
-		doc.append("id_msg", ObjectId.get().toHexString());
+		doc.append("id_message", ObjectId.get().toHexString());
 		doc.append("date",new Timestamp(System.currentTimeMillis()) );
 		if(message != null) {
-			doc.append("message", message);
+			doc.append("text", message);
 		}
 		Document old_message =new Document();
 		old_message= TwistTools.getTwist(id_message, collection);
@@ -163,9 +166,9 @@ public class TwistTools {
 		
 		Document twist =new Document();
 		twist.append("id_user", old_message.get("id_user"));
-		twist.append("id_msg",old_message.get("id_msg"));
+		twist.append("id_message",old_message.get("id_message"));
 		twist.append("date",old_message.get("date") );
-		twist.append("message", old_message.get("message"));
+		twist.append("text", old_message.get("text"));
 		twist.append("comments", old_message.get("comments"));
 		twist.append("likes", old_message.get("likes"));
 		
@@ -187,7 +190,7 @@ public class TwistTools {
 		twist = TwistTools.getTwist(id_message, collection);
 		
 		Document set = new Document();
-		set.append("message", message);
+		set.append("text", message);
 		// On crée un nouvel élement 
 		Document remplacement = new Document();
 		remplacement.append("$set" , set);

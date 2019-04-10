@@ -59,16 +59,8 @@ class App extends Component {
 
     }
 
-    //besoin d'ameliorer le code !! utiliser peut etre le key_session comme props
 
-
-
-
-
-
-
-    //ne pas oublier d'méliorer le NavigationPannel et enlever isLoogedIN et key_session afin d'utiliser que les cookies directement
-
+    // ajouter après le Route pour profile avec le login comme paramètre
     render() {
         const {isLoggedIn,currentPage,user,twists}=this.state
 

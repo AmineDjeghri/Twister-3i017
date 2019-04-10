@@ -25,10 +25,10 @@ public class ListComment extends HttpServlet {
 		//use map ??
 		
 		String key_session=request.getParameter("key_session");
-		String id_message=request.getParameter("id_message");
+		String id_twist=request.getParameter("id_twist");
 
 		
-		JSONObject json= CommentS.listComment(key_session, id_message);
+		JSONObject json= CommentS.listComment(key_session, id_twist);
 		PrintWriter resp=response.getWriter();
 
 		response.setContentType("text/json");

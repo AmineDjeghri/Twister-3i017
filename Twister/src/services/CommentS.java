@@ -24,9 +24,11 @@ public class CommentS {
 		if(key_session==null || comment==null || id_message==null )
 			return ErrorJSON.serviceRefused("Missing parameter",-2);
 		
+		Connection connection=null;
+		
 		try {
 			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
+			connection = Database.getMySQLConnection();
 			
 			if(!SessionTools.isConnectedByKey(key_session,connection)) 
 				return ErrorJSON.serviceRefused("Not connected",-3);	
@@ -58,6 +60,13 @@ public class CommentS {
 		}catch(SQLException e) {
 			e.printStackTrace();
 			
+		}finally {
+			if(connection!=null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 		return ErrorJSON.serviceRefused("Problem occured in addComment Service", -1);
 	}
@@ -67,10 +76,11 @@ public class CommentS {
 		
 		if(key_session==null || id_comment==null || id_message==null  )
 			return ErrorJSON.serviceRefused("Missing parameter",-2);
+		Connection connection=null;
 		
 		try {
 			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
+			connection = Database.getMySQLConnection();
 			
 			if(!SessionTools.isConnectedByKey(key_session,connection)) 
 				return ErrorJSON.serviceRefused("Not connected",-3);	
@@ -107,6 +117,13 @@ public class CommentS {
 			
 		}catch(JSONException e) {
 			e.printStackTrace();
+		}finally {
+			if(connection!=null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 		return ErrorJSON.serviceRefused("Problem occured in RemoveComment Service", -1);
 	}
@@ -117,9 +134,12 @@ public class CommentS {
 		if(key_session==null || id_message==null  )
 			return ErrorJSON.serviceRefused("Missing parameter",-2);
 		
+		
+		Connection connection=null;
+		
 		try {
 			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
+			 connection = Database.getMySQLConnection();
 			
 			if(!SessionTools.isConnectedByKey(key_session,connection)) 
 				return ErrorJSON.serviceRefused("Not connected",-3);
@@ -148,6 +168,13 @@ public class CommentS {
 		}catch(SQLException e) {
 			e.printStackTrace();
 			
+		}finally {
+			if(connection!=null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 		return ErrorJSON.serviceRefused("Problem occured in listComment Service", -1);
 	}
@@ -157,9 +184,10 @@ public class CommentS {
 		if(key_session==null || comment==null || id_message==null || id_comment==null)
 			return ErrorJSON.serviceRefused("Missing parameter",-2);
 		
+		Connection connection=null;
 		try {
 			//connect to mysql
-			Connection connection = Database.getMySQLConnection();
+			 connection = Database.getMySQLConnection();
 			
 			if(!SessionTools.isConnectedByKey(key_session,connection)) 
 				return ErrorJSON.serviceRefused("Not connected",-3);	
@@ -197,6 +225,13 @@ public class CommentS {
 		}catch(SQLException e) {
 			e.printStackTrace();
 			
+		}finally {
+			if(connection!=null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
 		return ErrorJSON.serviceRefused("Problem occured in addComment Service", -1);
 	}

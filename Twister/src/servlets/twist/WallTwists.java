@@ -30,10 +30,9 @@ public class WallTwists extends HttpServlet {
 		
 		String key_session=request.getParameter("key_session");
 		
-		
+
 		JSONObject json= TwistS.wallTwists(key_session);
 		PrintWriter resp=response.getWriter();
-
 		response.setContentType("text/json");
 		resp.println(json);
 		

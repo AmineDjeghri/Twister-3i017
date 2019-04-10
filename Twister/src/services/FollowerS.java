@@ -122,9 +122,9 @@ public class FollowerS {
 	}
 
 	
-	public static JSONObject listFollowing(String key_session) {
+	public static JSONObject listFollowing(String id_user) {
 
-		if(key_session==null)
+		if(id_user==null)
 			return ErrorJSON.serviceRefused("missing parameter",-1);
 		
 		Connection connection=null;
@@ -132,19 +132,6 @@ public class FollowerS {
 		try {
 			
 			connection = Database.getMySQLConnection();
-
-			if(!SessionTools.isConnectedByKey(key_session, connection))
-				return ErrorJSON.serviceRefused("Not connected", -3);
-			
-			if(SessionTools.hasExceededTimeOut(key_session, connection)) {
-				SessionTools.removeSession(key_session,connection);
-				return ErrorJSON.serviceRefused("TimeOut exceeded, disconnected automatically", 1);
-			}
-			
-			//ajout de 30min dans session_fin
-			SessionTools.updateTimeOut(key_session, connection);
-			
-			String id_user=SessionTools.getIdUser(key_session,connection);
 			
 			JSONObject json = FollowerTools.listFollowing(id_user, connection);
 			

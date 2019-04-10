@@ -6,6 +6,8 @@ import {FaRegComment, FaRegHeart} from "react-icons/fa/index";
 import CommentList from "./CommentList";
 import Comment from "./Comment";
 import CommentWrite from "./CommentWrite";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 class Twist extends Component {
 
@@ -29,15 +31,55 @@ class Twist extends Component {
         this.state={
             twist:this.props.twist,
             isPostOwner:false,
+            comments:[],
         }
 
         // Binding functions to `this`
         this.handleDelete = this.handleDelete.bind(this)
+        this.getComments=this.getComments.bind(this)
 
     }
 
 
-    handleDelete (evt)  {
+    handleDelete ()  {
+        const params={
+            key_session:Cookies.get('key_session'),
+            id_message:this.props.twist.id_message
+        }
+
+        axios.delete('http://localhost:8080/Twister/twist/remove',{params})
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                this.props.refreshList()
+            })
+
+
+    }
+
+
+    //to update only the comments twist
+    getComments (){
+        const params={
+            key_session:Cookies.get('key_session'),
+            id_twist:this.state.twist.id_message,
+        }
+
+        axios.get('http://localhost:8080/Twister/comment/list?'+new URLSearchParams(params))
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+
+
+                var twist={...this.state.twist}
+                twist.comments=res.data.comments
+                this.setState({twist})
+            })
+
+    }
+
+    componentDidMount() {
+        this.getComments()
     }
 
     render() {
@@ -65,7 +107,7 @@ class Twist extends Component {
                             <Dropdown.Toggle className="twist__dropdown-toggle" variant="success" size="sm" id="dropdown-basic"/>
                             <Dropdown.Menu alignRight>
                                 <Dropdown.Item href="#/action-1">Edit </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Delete </Dropdown.Item>
+                                <Dropdown.Item onClick={this.handleDelete}>Delete </Dropdown.Item>
                                 <Dropdown.Item href="#/action-3">Report</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -83,11 +125,11 @@ class Twist extends Component {
                         </Button>
 
                     </div>
-                    <CommentList className="twist__comment-list" comments={twist.comments}/>
+                    <CommentList className="twist__comment-list" twistId={twist.id_message}  comments={twist.comments}/>
                 </Media.Body>
             </Media>
 
-            <CommentWrite />
+            <CommentWrite twistId={twist.id_message} refreshList={this.getComments}/>
         </div>
         );
     }

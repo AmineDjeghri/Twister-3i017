@@ -7,28 +7,23 @@ import Comment from "./Comment";
 class CommentList extends Component {
 
     static propTypes={
-        commentList:PropTypes.arrayOf(PropTypes.object),
+        comments:PropTypes.arrayOf(PropTypes.object),
 
     }
 
     constructor(props) {
         super(props)
 
-        this.state={
-            comments:this.props.comments,
-
-        }
-
-        // Binding functions to `this`
-
     }
 
 
     render() {
-        const{comments}=this.state
+        const{comments}=this.props
+
+        console.log('constructor appelé '+comments.length)
         return (
             <div className="comment-list">
-                {comments.map((val, index) => <Comment comment={val} key={index} />)}
+                {comments.map((val, index) => <Comment comment={val} twistId={this.props.twistId} key={index} />)}
             </div>
 
 

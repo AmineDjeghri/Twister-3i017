@@ -13,23 +13,22 @@ import Cookies from 'js-cookie';
 class TwistList extends Component {
 
     static propTypes={
-        twists:PropTypes.arrayOf(PropTypes.object),
+
 
     }
 
     constructor(props) {
         super(props)
-
-        this.state={
+    this.state={
             twists:[],
-        }
+    }
 
-        this.getWallTwists=this.getWallTwists.bind(this)
+        this.getTwists=this.getTwists.bind(this)
 
     }
 
 
-    getWallTwists(){
+    getTwists (){
 
         const params={
             key_session:Cookies.get('key_session'),
@@ -44,24 +43,28 @@ class TwistList extends Component {
 
     }
 
+    componentDidMount() {
+        this.getTwists()
+    }
+
+
 
     render() {
         const{twists}=this.state
         return (
             <div>
-                    <button onClick={this.getWallTwists}> click</button>
                 <Card >
 
                     <Card.Body>
                         <Card.Title>Twist Wall</Card.Title>
-                        <TwistWrite updateWall={this.getWallTwists}/>
+                        <TwistWrite refreshList={this.getTwists}/>
                     </Card.Body>
 
 
                     <ListGroup className="list-group-flush">
-                        {twists.map((val, index) => (
-                            <ListGroupItem key={index}>
-                                <Twist twist={val}  />
+                        {twists.map((val) => (
+                            <ListGroupItem key={val.id_message}>
+                                <Twist refreshList={this.getTwists} twist={val}  />
                             </ListGroupItem>
                         ))}
                     </ListGroup>
