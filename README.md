@@ -4,6 +4,7 @@ It's a 'Tweeter like' website called 'Twister'
 it contains :
 - A server-side (Java EE)
 - A client-side (ReactJS)
+
 if you did find this project helpful, please leave a star for it.
 
 ## Authors:
