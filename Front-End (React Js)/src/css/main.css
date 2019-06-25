@@ -1,0 +1,298 @@
+
+/*-----------------general--------------*/
+html,body{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #E1E8ED;
+    font-family: Segoe UI;
+}
+
+#root {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.app{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.text--blue{
+    color: #1DA1F2;
+}
+
+.text--grey{
+    color: #657786;
+}
+
+.btn--blue{
+    background: #1DA1F2;
+    border-radius: 25px;
+    border: none;
+    color: white;
+}
+
+.btn--white{
+    color: #1DA1F2;
+    background: white;
+    border-radius: 5px;
+    border: solid 1px #1DA1F2;
+
+}
+
+.btn--rounded{
+    border-radius: 25px;
+}
+
+.text--small{
+    font-size: 14px;
+
+}
+
+.text--bold{
+    font-weight: bold;
+}
+
+
+
+
+/*---------- TwistList--------*/
+
+/*------------twistWrite -----*/
+.twist-write{
+
+}
+.btn__twist-write{
+    margin-top: 5px;
+}
+
+/*---------Twist--------*/
+.twist__header{
+    borderBottom: solid 1px #e6ecf0;
+}
+
+.twist__fullname:hover {
+    text-decoration: underline;
+}
+
+.twist__date{
+    margin-left: 5px;
+    font-family: Segoe UI;
+    color: #abb8c2;
+    font-size: 14px;
+}
+.twist__dropdown{
+    display: inline-block;
+    float: right;
+}
+.twist__dropdown-toggle{
+    background:white;
+    color: grey;
+    font-weight: bold;
+    border: none;
+    opacity:1;
+    box-shadow:none;
+}
+
+.twist__text{
+    font-family: "Segoe UI";
+    color: #14171a;
+    font-size: 14px;
+    text-align: justify;
+    padding: 0 2px;
+}
+
+.twist__action-btn{
+border: none;
+}
+
+.twist__action-btn:hover{
+    background: none;
+}
+
+.twist__action-icon{
+    color: #1DA1F2;
+}
+.twist__action-icon:hover{
+    color: red;
+}
+.twist__action-counter{
+    color: #1DA1F2;
+}
+
+/*--------- CommentWrite-------*/
+.comment-write_btn{
+    margin-top: 5px;
+    border-radius: 15px;
+}
+/*------- Comment----------*/
+.comment{
+    border-bottom: solid 1px #e6ecf0;
+}
+
+/*-----CommentList--------*/
+/*.comment{
+    width: 90%;
+    margin: auto;
+}
+*/
+/*--------------Login------------*/
+.login{
+    width: 50%;
+    background: white;
+    margin: auto;
+    padding: 15px;
+    border: #abb8c2 solid 1px;
+    border-radius: 9px;
+
+}
+
+
+.login__header h1{
+    font-family: "Segoe UI";
+    color: #14171a;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.login__forgot-password{
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.login__footer{
+    padding-top: 5px;
+}
+
+/*-----------Signup----------*/
+.signup{
+    width: 50%;
+    background: white;
+    margin: auto;
+    padding: 15px;
+    border: #abb8c2 solid 1px;
+    border-radius: 9px;
+}
+
+.signup__header h1{
+    font-family: "Segoe UI";
+    color: #14171a;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/*--------------Navigation panel----------*/
+.navigation-panel__navbar{
+    border-bottom: black solid 1px ;
+}
+
+.navbar__search-form{
+    margin: auto;
+}
+.navbar__dropdown .dropdown-toggle::after{
+    content: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__dropdown .nav-link{
+padding: 0;
+}
+
+.navbar__pp{
+    height: 100%;
+    width: 100%;
+    margin: -20px 0 -20px 0;
+    padding: 0;
+    height: 50px;
+    width: 50px;
+}
+
+.navbar__pp:hover{
+    border: #1DA1F2 1px solid;
+}
+
+/*---------------DashboardProfileCard---------------*/
+.dashboard-profile{
+}
+
+.dashboard-profile__bg{
+    height: 100px;
+}
+.dashboard-profile__pp{
+    margin: 0;
+    padding: 0;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+
+.dashboard-profile .card-body{
+    padding: 5px;
+}
+
+
+/*-----------home----------*/
+.main-container{
+        padding-top: 5px;
+}
+
+.main-container__row{
+    padding: 0;
+    margin: 0;
+}
+
+/*-----------profile------------*/
+.profile__bg{
+    width: 100%;
+    height: 280px;
+}
+
+.profile__pp{
+    margin-top: -100px;
+    margin-bottom: -100px;
+    border-radius: 50%;
+    border: azure 3px solid;
+
+}
+
+/*-----------Welcome------------*/
+.carouselStyle{
+    margin-top: 20%;
+}
+
+/*-----------RecoverPassword------*/
+.recoverpassword{
+    width: 50%;
+    background: white;
+    margin: auto;
+    padding: 15px;
+    border: #abb8c2 solid 1px;
+    border-radius: 9px;
+
+}
+
+
+.recoverpassword__header h1{
+    font-family: "Segoe UI";
+    color: #14171a;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.login__forgot-password{
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.recoverpassword__footer{
+    padding-top: 5px;
+}
+
+.main-carrousel{
+
+    margin-top: 20px;
+}

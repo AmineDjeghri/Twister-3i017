@@ -11,10 +11,14 @@ it contains :
 Java EE, SQL, NoSQL, ReactJS
 
 ### IDE:
-Eclipse 
+Eclipse, WebSotrm
 ### Servers:
 -tomcat v9.0 (added to eclipse)
 -nodeJS v10.14.2 (to run reactjs)
+
+### Testing Software:
+Postman (read the Testing guide)
+
 ### SQL database:
 -mysql local: wamp/xamp 
 -mysql on cloud (remotemysql.com , don't change the generated password when you create your database)
@@ -37,8 +41,8 @@ First Clone it:
 ```
  git clone http://github.com/AmineDjeghri/Twister.git
 ```
--the server-side is Twister/Twister, import the project inside Eclipse and run it in a server (Tomcat v9.0)
--the client-side is Twister/twister-react, run it with npm (You need to be inside twister-react):
+-the server-side is Twister/Back-End, import the project inside Eclipse and run it in a server (Tomcat v9.0)
+-the client-side is Twister/Front-End, run it with npm (You need to be inside twister-react):
 	```cd twister-react```
 	```npm install```
 	```npm start```
@@ -52,17 +56,14 @@ Twister/Twister/src/db/DBStatic.java
 -To use the local or the remote database : open the java file Twister/Twister/src/db/Database.java, and choose the database in both functions:
 getMySQLConnection and getMongoDBConnection 
 
-
-### Testing:
-Postman (read the Testing guide)
-
 ## Important :
 
 The required services to code are in Ennoncés/listeServices.pdf 
 
 We changed the name of the services so they will look like Tweeter and added also some other services
 
-Here all the services :
+Here all the services : 
+( Services are more detailed in the file: BackEnd_FrontEnd_DOC.pdf)
 
 - CreateUser (like inscription)
 - Login
@@ -72,6 +73,7 @@ Here all the services :
 - Comment (to comment a tweet)
 - RemoveTwist (previous naming: RemoveMessage)
 - ListTwists (previous naming: ListMessage)
+- Wall Twists
 - Follow (preview naming: AddFriend)
 - ListFollowers (previous naming: ListFriends)
 - ListFollowing 
