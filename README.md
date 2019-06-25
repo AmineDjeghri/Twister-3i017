@@ -1,6 +1,6 @@
 # Twister
 
-This is a university project for "Technologies du Web - L3" 
+This is a university project for "Technologies du Web (3i017) - L3" 
 It's a 'Tweeter like' website called 'Twister'
 it contains :
 - A server-side (Java EE)
