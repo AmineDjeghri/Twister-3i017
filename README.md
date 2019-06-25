@@ -7,7 +7,7 @@ it contains :
 if you did find this project helpful, please leave a star for it.
 
 ## Authors:
-- DJEGHRI Amine
+- Amine Djeghri
 - Ahmed Adonis Haouili
 
 ## Programming Languages & Development Tools
