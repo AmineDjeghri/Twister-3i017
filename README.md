@@ -1,10 +1,14 @@
 # Twister
-
 This is a university project for "Technologies du Web (3i017) - L3" 
 It's a 'Tweeter like' website called 'Twister'
 it contains :
 - A server-side (Java EE)
 - A client-side (ReactJS)
+if you did find this project helpful, please leave a star for it.
+
+## Authors:
+- DJEGHRI Amine
+- Ahmed Adonis Haouili
 
 ## Programming Languages & Development Tools
 ### Langage: 
