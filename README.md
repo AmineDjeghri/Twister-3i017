@@ -12,7 +12,7 @@ if you did find this project helpful, please leave a star for it.
 - Ahmed Adonis Haouili
 
 ## Programming Languages & Development Tools
-### Langage: 
+### Langage & Tech: 
 Java EE, SQL, NoSQL, ReactJS
 
 ### IDE:
