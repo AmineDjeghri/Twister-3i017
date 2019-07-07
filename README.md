@@ -39,7 +39,7 @@ phpmyadmin
 mongoDB Compass: a GUI that lets you visually, explore your data.
 
 ### MapReduce:
-not yet
+did only first part of it
 
 ## Installation
 First Clone it:
